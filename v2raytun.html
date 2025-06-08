@@ -5,14 +5,45 @@
   <title>Импорт V2RayTun</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 40px; }
-    a { word-break: break-all; display: block; margin-top: 20px; }
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background-color: #f5f5f5;
+    }
+    a, code, pre {
+      word-break: break-word;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+    .block {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .fallback-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
-  <h2>⏳ Открытие V2RayTun...</h2>
-  <p>Если не сработало автоматически, нажмите:</p>
-  <a id="manual-link" href="#">Открыть вручную</a>
+  <h2>📲 Импорт конфигурации в V2RayTun</h2>
+
+  <div class="block" id="instructions" style="display: none;">
+    <p>Если автооткрытие не сработает:</p>
+    <ol style="text-align: left;">
+      <li>Откройте приложение <strong>V2RayTun</strong></li>
+      <li>Выберите <em>Import → Paste</em></li>
+      <li>Вставьте ссылку ниже вручную:</li>
+    </ol>
+    <pre id="config-block"></pre>
+    <a class="fallback-link" id="manual-link" href="#" target="_blank">👉 Открыть вручную</a>
+  </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -20,8 +51,17 @@
 
     if (config) {
       const schemeUrl = `v2raytun://import?url=${config}`;
+
+      // Обновляем блок вручную
+      const decoded = decodeURIComponent(config);
       document.getElementById('manual-link').href = schemeUrl;
-      setTimeout(() => { window.location.href = schemeUrl }, 100);
+      document.getElementById('config-block').textContent = schemeUrl;
+      document.getElementById('instructions').style.display = 'block';
+
+      // Пробуем редирект (может быть заблокирован)
+      setTimeout(() => {
+        window.location.href = schemeUrl;
+      }, 300);
     } else {
       document.body.innerHTML = '<h2>❌ Ошибка: не передана конфигурация</h2>';
     }
