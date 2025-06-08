@@ -65,7 +65,7 @@
 </head>
 <body>
   <header>
-    <h1>📘 Инструкции по подключению к VPN</h1>
+    <h1>📘 Инструкции подключения к VPN</h1>
     <nav>
       <a href="#android">Android</a>
       <a href="#ios">iPhone</a>
@@ -139,7 +139,7 @@
     const params = new URLSearchParams(window.location.search);
     const config = params.get("config");
     if (config) {
-      const schemeUrl = `v2raytun://import/${config}`
+      const url = `v2raytun://import/${config}`;
       document.getElementById("manual-link").textContent = url;
       document.getElementById("manual-button").href = url;
       setTimeout(() => {
