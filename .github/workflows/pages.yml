@@ -19,9 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/upload-pages-artifact@v2  # ✅ обновлено
+
+      - name: Upload site content
+        uses: actions/upload-artifact@v4
         with:
-          path: .  # путь к файлам для публикации (например ./build или ./dist)
+          name: github-pages
+          path: .  # или ./dist, ./docs — куда ты кладёшь HTML
 
   deploy:
     needs: build
@@ -30,5 +33,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: .  # сюда скачивается
+
       - id: deployment
-        uses: actions/deploy-pages@v2  # ✅ желательно тоже обновить
+        uses: actions/deploy-pages@v2
