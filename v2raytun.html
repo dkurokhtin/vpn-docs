@@ -139,7 +139,7 @@
     const params = new URLSearchParams(window.location.search);
     const config = params.get("config");
     if (config) {
-      const url = `v2raytun://import/${config}`;
+      const schemeUrl = `v2raytun://import/${config}`
       document.getElementById("manual-link").textContent = url;
       document.getElementById("manual-button").href = url;
       setTimeout(() => {
