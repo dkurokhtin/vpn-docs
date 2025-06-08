@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Автоматический импорт</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f4f4f4;
+    }
+    a {
+      word-break: break-all;
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #007bff;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 10px;
+      display: inline-block;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>⏳ Открытие V2RayTun...</h2>
+  <p>Если приложение не открылось автоматически, нажмите на ссылку ниже:</p>
+  <a id="manual-link" href="#">Открыть вручную</a>
+
+  <p><strong>Пример ссылки:</strong></p>
+  <code>
+    v2raytun://import/vless://uuid@host:443?encryption=none&...#имя
+  </code>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const config = params.get('config');
+
+    if (config) {
+      const schemeUrl = `v2raytun://import/${config}`;
+      document.getElementById('manual-link').href = schemeUrl;
+      setTimeout(() => {
+        window.location.href = schemeUrl;
+      }, 500);
+    } else {
+      document.body.innerHTML = '<h2>❌ Ошибка: параметр config не передан в URL</h2>';
+    }
+  </script>
+</body>
+</html>
