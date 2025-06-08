@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Импорт V2RayTun</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    a { word-break: break-all; display: block; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>⏳ Открытие V2RayTun...</h2>
+  <p>Если не сработало автоматически, нажмите:</p>
+  <a id="manual-link" href="#">Открыть вручную</a>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const config = params.get('config');
+
+    if (config) {
+      const schemeUrl = `v2raytun://import?url=${config}`;
+      document.getElementById('manual-link').href = schemeUrl;
+      setTimeout(() => { window.location.href = schemeUrl }, 100);
+    } else {
+      document.body.innerHTML = '<h2>❌ Ошибка: не передана конфигурация</h2>';
+    }
+  </script>
+</body>
+</html>
