@@ -1,70 +1,91 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Импорт V2RayTun</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Инструкции по подключению</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
       padding: 2rem;
-      background-color: #f5f5f5;
+      background-color: #f4f4f4;
+      color: #333;
     }
-    a, code, pre {
-      word-break: break-word;
-      font-family: monospace;
-      font-size: 0.95rem;
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
     }
-    .block {
-      margin-top: 1.5rem;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 8px;
+    h1 {
+      font-size: 1.8rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    nav a {
+      padding: 0.5rem 1rem;
+      background-color: #0078d7;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    section {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
     }
-    .fallback-link {
-      display: inline-block;
-      margin-top: 1rem;
-      font-weight: bold;
-      font-size: 1.1rem;
+    h2 {
+      color: #0078d7;
+    }
+    pre {
+      background-color: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <h2>📲 Импорт конфигурации в V2RayTun</h2>
+  <header>
+    <h1>📘 Инструкции по подключению к VPN</h1>
+    <nav>
+      <a href="#android">Android</a>
+      <a href="#ios">iPhone</a>
+      <a href="#auto">Автоимпорт (iOS)</a>
+    </nav>
+  </header>
 
-  <div class="block" id="instructions" style="display: none;">
-    <p>Если автооткрытие не сработает:</p>
-    <ol style="text-align: left;">
-      <li>Откройте приложение <strong>V2RayTun</strong></li>
-      <li>Выберите <em>Import → Paste</em></li>
-      <li>Вставьте ссылку ниже вручную:</li>
+  <section id="android">
+    <h2>📱 Подключение на Android</h2>
+    <ol>
+      <li>Скачайте <strong>v2rayNG</strong> из Google Play.</li>
+      <li>Откройте приложение и нажмите <code>+</code>.</li>
+      <li>Выберите <em>Import from Clipboard</em> или вставьте вручную:</li>
+      <pre>vless://your-vpn-link-here</pre>
+      <li>Сохраните и включите профиль.</li>
     </ol>
-    <pre id="config-block"></pre>
-    <a class="fallback-link" id="manual-link" href="#" target="_blank">👉 Открыть вручную</a>
-  </div>
+  </section>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const config = params.get('config');
+  <section id="ios">
+    <h2>🍏 Подключение на iPhone</h2>
+    <ol>
+      <li>Скачайте <strong>V2RayTun</strong> из App Store.</li>
+      <li>Нажмите <em>Import</em> и вставьте ссылку вручную:</li>
+      <pre>vless://your-vpn-link-here</pre>
+      <li>Сохраните профиль и включите подключение.</li>
+    </ol>
+  </section>
 
-    if (config) {
-      const schemeUrl = `v2raytun://import?url=${config}`;
-
-      // Обновляем блок вручную
-      const decoded = decodeURIComponent(config);
-      document.getElementById('manual-link').href = schemeUrl;
-      document.getElementById('config-block').textContent = schemeUrl;
-      document.getElementById('instructions').style.display = 'block';
-
-      // Пробуем редирект (может быть заблокирован)
-      setTimeout(() => {
-        window.location.href = schemeUrl;
-      }, 300);
-    } else {
-      document.body.innerHTML = '<h2>❌ Ошибка: не передана конфигурация</h2>';
-    }
-  </script>
+  <section id="auto">
+    <h2>⚡️ Автоматический импорт (только iOS)</h2>
+    <p>Нажмите кнопку ниже для автоимпорта конфигурации в V2RayTun:</p>
+    <p><a href="v2raytun.html?config=ENCODED_CONFIG" style="font-weight: bold;">👉 Открыть автоимпорт</a></p>
+    <p>Если не сработает, используйте ручной способ выше.</p>
+  </section>
 </body>
 </html>
