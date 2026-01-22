@@ -2,123 +2,395 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Инструкции по подключению</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DK BEST VPN: Быстрый старт</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Новая палитра из дизайна */
+      --primary: #00C8B5; /* Основной бирюзовый */
+      --primary-hover: #00a898;
+      --dark-brand: #101C2D; /* Глубокий темный для шапки */
+      
+      --bg: #F5F7FA; /* Светлый фон для контента */
+      --card: #FFFFFF;
+      --text: #1C1C1E;
+      --subtext: #8E8E93;
+      
+      --accent-bg: rgba(0, 200, 181, 0.1); /* Светло-бирюзовый фон */
+      --success: #34C759;
+      --border: rgba(0,0,0,0.08);
+      --radius: 24px;
+    }
+
+    /* Поддержка темной темы устройства (опционально, адаптировано под новый дизайн) */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a111a;
+        --card: #151f2e;
+        --text: #FFFFFF;
+        --subtext: #98989D;
+        --border: rgba(255,255,255,0.1);
+      }
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
       margin: 0;
-      padding: 2rem;
-      background-color: #f4f4f4;
-      color: #333;
+      padding: 0; /* Убрали отступы body, чтобы шапка была на всю ширину */
+      line-height: 1.4;
+      min-height: 100vh;
     }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    h1 {
-      font-size: 1.8rem;
-    }
-    nav {
+
+    .main-wrapper {
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      flex-direction: column;
+      align-items: center;
     }
-    nav a {
-      padding: 0.5rem 1rem;
-      background-color: #0078d7;
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* --- Новая темная шапка --- */
+    .hero-header {
+      background-color: var(--dark-brand);
+      width: 100%;
+      color: white;
+      padding: 40px 20px 30px;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 200, 181, 0.15);
+    }
+
+    .brand-logo {
+      font-size: 48px; /* Размер заглушки-робота */
+      margin-bottom: 10px;
+      display: inline-block;
+      /* Если будешь вставлять картинку, удали font-size и раскомментируй ниже: */
+      /* width: 80px; height: auto; */
+    }
+
+    .brand-name {
+        font-weight: 800;
+        font-size: 24px;
+        letter-spacing: 1px;
+        margin: 0;
+    }
+    .brand-name span { color: var(--primary); }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* --- Tabs Toggle --- */
+    .tabs {
+      background: var(--card);
+      padding: 4px;
+      border-radius: 16px;
+      display: flex;
+      margin-bottom: 25px;
+      position: relative;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    
+    .tab-btn {
+      flex: 1;
+      border: none;
+      background: none;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--subtext);
+      cursor: pointer;
+      z-index: 2;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      color: var(--text);
+      background: var(--accent-bg); /* Активная вкладка теперь светло-бирюзовая */
+      color: var(--primary);
+    }
+    
+    /* --- Cards --- */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      margin-bottom: 25px;
+      border: 1px solid var(--border);
+    }
+
+    .guide-card { display: none; animation: fadeIn 0.3s ease; }
+    .guide-card.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Main Button (Новый цвет) --- */
+    .btn-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover)); /* Градиент для объема */
       color: white;
       text-decoration: none;
-      border-radius: 5px;
+      padding: 18px;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 30px;
+      transition: transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(0, 200, 181, 0.3);
     }
-    section {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      margin-bottom: 2rem;
+    .btn-main:active { transform: scale(0.98); }
+    .btn-main:hover { box-shadow: 0 6px 20px rgba(0, 200, 181, 0.4); }
+
+    /* Steps */
+    .step { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px; }
+    .step:last-child { margin-bottom: 10px; }
+    
+    .step-num {
+      background: var(--accent-bg);
+      color: var(--primary);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 2px var(--primary); /* Обводка внутри */
     }
-    h2 {
-      color: #0078d7;
+    
+    .step-text strong { display: block; margin-bottom: 6px; font-size: 17px; }
+    .step-text span { color: var(--subtext); font-size: 14px; line-height: 1.5; }
+
+    /* Pricing Section */
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 40px 0 20px 0;
+      padding-left: 10px;
     }
-    pre {
-      background-color: #eee;
-      padding: 1rem;
-      overflow-x: auto;
-      border-radius: 5px;
+
+    .pricing-grid { display: grid; gap: 15px; }
+
+    .price-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid var(--border); /* Жирнее рамка */
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
     }
-    .fallback {
-      margin-top: 1rem;
-      font-size: 0.95rem;
+    
+    .price-card:active { transform: scale(0.98); }
+
+    .price-info h3 { margin: 0 0 4px 0; font-size: 17px; font-weight: 700; }
+    .price-info p { margin: 0; font-size: 13px; color: var(--subtext); font-weight: 500;}
+    
+    .price-val { text-align: right; }
+    .main-price { font-size: 20px; font-weight: 800; display: block; color: var(--text); }
+    .per-month { font-size: 12px; color: var(--subtext); display: block; margin-top: 2px; font-weight: 500;}
+
+    /* Badges */
+    .badge {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+      letter-spacing: 0.5px;
     }
-    .hidden {
-      display: none;
+    .badge-free { background: var(--success); color: white; }
+    /* Новый стиль для бейджа "Выгодно" */
+    .badge-best { background: var(--primary); color: white; box-shadow: 0 2px 10px rgba(0, 200, 181, 0.3); }
+
+    /* Troubleshooting */
+    details {
+      margin-top: 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
     }
-    ul {
-      padding-left: 1.2rem;
-    }
-    li {
-      margin-bottom: 0.6rem;
-    }
+    summary { padding: 18px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; list-style: none; transition: color 0.2s;}
+    summary:hover { color: var(--primary); }
+    summary::after { content: '+'; color: var(--primary); font-size: 20px; font-weight: 300;}
+    details[open] summary::after { content: '−'; }
+    .faq-content { padding: 0 20px 20px 20px; font-size: 14px; color: var(--subtext); line-height: 1.6;}
+    .faq-content ul { padding-left: 20px; margin: 0; }
+    .faq-content li { margin-bottom: 10px; }
+
   </style>
 </head>
 <body>
-  <header>
-    <h1>📘 Инструкции подключения к VPN</h1>
-    <nav>
-      <a href="#android">Android</a>
-      <a href="#ios">iPhone</a>
-      <a href="#auto">Автоимпорт (iOS)</a>
-    </nav>
+
+<div class="main-wrapper">
+  
+  <header class="hero-header">
+   
+    <h1 class="brand-name">DK BEST <span>VPN</span></h1>
+    <p class="hero-subtitle">Быстрая настройка доступа</p>
   </header>
 
-  <section id="android">
-    <h2>📱 Подключение V2RayTun на Android</h2>
-    <p><strong>Скачайте приложение:</strong><br>
-      <a href="https://play.google.com/store/apps/details?id=com.v2raytun.android&hl=ru" target="_blank">
-        Google Play → V2RayTun
-      </a>
-    </p>
-    <ol>
-      <li>Установите V2RayTun</li>
-      <li>Скопируйте ссылку для подписки из бота</li>
-      <li>Откройте V2RayTun</li>
-      <li>Нажмите <strong>+</strong> в правом верхнем углу</li>
-      <li>Выберите «Из буфера обмена» — подписка загрузится</li>
-      <li>Выберите сервер и нажмите «Подключиться»</li>
-      <li>Подтвердите создание VPN-профиля, если потребуется</li>
-    </ol>
-    <ul>
-      <li>🔄 Подписка обновляется автоматически</li>
-      <li>🌐 Проверь IP на <a href="https://2ip.ru" target="_blank">2ip.ru</a></li>
-      <li>📵 Если не подключается — проверь интернет или повтори импорт</li>
-      <li>💬 Остались вопросы? Напиши — поможем 👨‍💻</li>
-    </ul>
-  </section>
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('ios')">iPhone</button>
+      <button class="tab-btn" onclick="switchTab('android')">Android</button>
+    </div>
 
-  <section id="ios">
-    <h2>🍏 Подключение V2RayTun на iPhone</h2>
-    <p><strong>Скачайте приложение:</strong><br>
-      <a href="https://apps.apple.com/ru/app/v2raytun/id6476628951" target="_blank">
-        App Store → V2RayTun
+    <div id="ios" class="card guide-card active">
+      <a href="https://apps.apple.com/ru/app/v2raytun/id6476628951" target="_blank" class="btn-main">
+        Скачать V2RayTun
       </a>
-    </p>
-    <ol>
-      <li>Установите V2RayTun</li>
-      <li>Скопируйте ссылку для подписки из бота</li>
-      <li>Откройте V2RayTun</li>
-      <li>Нажмите <strong>+</strong> в правом верхнем углу</li>
-      <li>Выберите «Из буфера обмена» — подписка загрузится</li>
-      <li>Выберите сервер и нажмите «Подключиться»</li>
-      <li>Разрешите создание VPN-профиля при запросе</li>
-    </ol>
-    <ul>
-      <li>🔄 Подписка обновляется автоматически</li>
-      <li>🌐 Проверь IP на <a href="https://2ip.ru" target="_blank">2ip.ru</a></li>
-      <li>📵 Если не подключается — проверь интернет или повтори импорт</li>
-      <li>💬 Остались вопросы? Напиши — поможем 👨‍💻</li>
-    </ul>
-  </section>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Скопируй ключ</strong><span>Из сообщения в Telegram (начинается с vless://)</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Открой приложение</strong><span>Оно автоматически предложит добавить ключ из буфера</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Нажми подключить</strong><span>Большая круглая кнопка по центру экрана</span></div>
+      </div>
+    </div>
+
+    <div id="android" class="card guide-card">
+      <a href="https://play.google.com/store/apps/details?id=com.v2raytun.android&hl=ru" target="_blank" class="btn-main">
+        Скачать V2RayTun
+      </a>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Скопируй ключ</strong><span>Полностью скопируй текст ключа (vless://...)</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Открой приложение</strong><span>Нажми кнопку (+) вверху → Импорт из буфера обмена</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Нажми подключить</strong><span>Выбери добавленный сервер и нажми кнопку подключения</span></div>
+      </div>
+    </div>
+
+    <div class="section-title">Тарифы</div>
+    <div class="pricing-grid">
+      
+      <a href="https://t.me/YOUR_BOT_NAME" class="price-card">
+        <div class="price-info">
+          <h3>Тест <span class="badge badge-free">Free</span></h3>
+          <p>7 дней бесплатно</p>
+        </div>
+        <div class="price-val">
+          <span class="main-price" style="color: var(--success)">0 ₽</span>
+        </div>
+      </a>
+
+      <a href="https://t.me/YOUR_BOT_NAME" class="price-card">
+        <div class="price-info">
+          <h3>Базовый</h3>
+          <p>1 месяц</p>
+        </div>
+        <div class="price-val">
+          <span class="main-price">149 ₽</span>
+          <span class="per-month">Оплата раз в месяц</span>
+        </div>
+      </a>
+
+      <a href="https://t.me/YOUR_BOT_NAME" class="price-card">
+        <div class="price-info">
+          <h3>Стандарт</h3>
+          <p>3 месяца</p>
+        </div>
+        <div class="price-val">
+          <span class="main-price">379 ₽</span>
+          <span class="per-month">~126 ₽ / мес</span>
+        </div>
+      </a>
+
+      <a href="https://t.me/YOUR_BOT_NAME" class="price-card">
+        <div class="price-info">
+          <h3>Максимум</h3>
+          <p>6 месяцев</p>
+        </div>
+        <div class="price-val">
+          <span class="main-price">699 ₽</span>
+          <span class="per-month">~116 ₽ / мес</span>
+        </div>
+      </a>
+
+      <a href="https://t.me/YOUR_BOT_NAME" class="price-card" style="border-color: var(--primary); background: rgba(0, 200, 181, 0.04);">
+        <div class="price-info">
+          <h3>Годовой <span class="badge badge-best">Выгодно</span></h3>
+          <p>12 месяцев</p>
+        </div>
+        <div class="price-val">
+          <span class="main-price" style="color: var(--primary)">1199 ₽</span>
+          <span class="per-month" style="color: var(--text); font-weight:700">всего 99 ₽ / мес</span>
+        </div>
+      </a>
+
+    </div>
+
+    <details>
+      <summary>Не работает? Нажми сюда</summary>
+      <div class="faq-content">
+        <ul>
+          <li><strong>Не подключается:</strong> Попробуй сменить сеть (Wi-Fi на мобильный интернет или наоборот) и нажми кнопку подключения снова.</li>
+          <li><strong>Нет интернета после подключения:</strong> В приложении нажми на три точки рядом с подпиской → "Update subscription" (Обновить).</li>
+          <li><strong>Ничего не помогает?</strong> Напиши мне в личные сообщения, решим проблему!</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+</div>
+
+<script>
+  function switchTab(os) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.guide-card').forEach(c => c.classList.remove('active'));
+    document.getElementById(os).classList.add('active');
+    
+    const btns = document.querySelectorAll('.tab-btn');
+    if(os === 'ios') btns[0].classList.add('active');
+    else btns[1].classList.add('active');
+  }
+
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  if (/android/i.test(userAgent)) switchTab('android');
+</script>
+
 </body>
 </html>
